@@ -1,8 +1,9 @@
-//Illogicians with a Hint of Rationality - Adam McKoy, Ruochong Wu
-//APCS1 pd10
-//HW41 -- In America, the Driver Sits on the Left
-//2015-12-04
-
+/*
+Ruochong Wu
+APCS1 Pd10
+HW45 -- Come Together
+2015-12-09
+*/
 public class Rational implements Comparable{
 
     //instance variables
@@ -31,6 +32,11 @@ public class Rational implements Comparable{
     public int getDen(){
 	return denominator;
     }
+
+    public int get_decNum(){
+	return numerator/denominator;
+    }
+    
     public String toString(){
 	return ""+numerator+"/"+denominator;
     }
@@ -96,18 +102,16 @@ public class Rational implements Comparable{
 	numerator /= gcd;
 	denominator /= gcd;
     }
-    public int compareTo(Object O){
-	if(O instanceof Rational)
-	    if (this.numerator * ((Rational)O).denominator > this.denominator * ((Rational)O).numerator){
-		return 1;
-	    }
-	    else if (this.numerator * ((Rational)O).denominator < this.denominator * ((Rational)O).numerator){
-		return -1;
-	    }
-	    else{
-		return 0;
-	    }
-	else return -2;
+    public int compareTo( Object other ) {
+	if (other == null){
+	    throw new NullPointerException("The input is null");
+	}
+	if (other instanceof Comparable){
+	    return this.get_decNum() - ((Comparable)other).get_decNum();
+	}
+	else {
+	    throw new ClassCastException("The input is not a comparable");
+	}
     }
     
     public boolean equals(Object x){
@@ -116,7 +120,7 @@ public class Rational implements Comparable{
 	else return false;
     }
     public static void main(String[] args){
-	Rational george = new Rational();
+	/*	Rational george = new Rational();
 	Rational marley = new Rational(17,38);
 	Rational tigger = new Rational(21,69);
 	Rational bigger = new Rational(1,2);
@@ -150,6 +154,9 @@ public class Rational implements Comparable{
 	System.out.println(bigger.equals(bigger)); //true
 	System.out.println(bigger.equals(larger)); //true
 	System.out.println(bigger.equals(a)); //false
-	
+	*/
+	Rational r1 = new Rational (5,1);
+	Binary b1 = new Binary(5);
+	System.out.println(r1.compareTo(b1));
     }
 }

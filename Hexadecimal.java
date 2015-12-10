@@ -1,10 +1,10 @@
 /*
-WARS - Ruochong Wu and Shaik Abiden
-APCS1 PD10
-HW44 -- This or That or Fourteen Other Things
-2015-08-12
+Ruochong Wu
+APCS1 Pd10
+HW45 -- Come Together
+2015-12-09
 */
-public class Hexadecimal {
+public class Hexadecimal implements Comparable{
 
     private final static String HEXDIGITS = "0123456789ABCDEF"; //index of Hex char = value in base 10
     private int _decNum;
@@ -54,6 +54,9 @@ public class Hexadecimal {
 	return _hexNum;
     }
 
+    public int get_decNum(){
+	return _decNum;
+    }
 
     /*=====================================
       String decToBin(int) -- converts base-10 input to hexadecimal
@@ -153,18 +156,14 @@ public class Hexadecimal {
       negative integer if this<input, positive integer otherwise
       =============================================*/
     public int compareTo( Object other ) {
-	int otherVal = hexToDec(other.toString());
-	if (!(other instanceof Hexadecimal)){
-	    throw new ClassCastException("The input isn't a Hexadecimal");
+	if (other == null){
+	    throw new NullPointerException("The input is null");
 	}
-	if (this._decNum == otherVal){
-	    return 0;
-	}
-	else if(this._decNum > otherVal){
-	    return 1;
+	if (other instanceof Comparable){
+	    return this._decNum - ((Comparable)other).get_decNum();
 	}
 	else {
-	    return -1;
+	    throw new ClassCastException("The input is not a comparable");
 	}
     }
 
@@ -173,7 +172,7 @@ public class Hexadecimal {
     public static void main( String[] args ) {
 
 
-	System.out.println();
+	/*	System.out.println();
 	System.out.println( "Testing ..." );
 
 	Hexadecimal b1 = new Hexadecimal(5);
@@ -244,6 +243,10 @@ public class Hexadecimal {
 	System.out.println( hexToDec("2E"));
 	System.out.println( hexToDec("111"));
 	System.out.println( hexToDec("2F"));
+	*/
+	Hexadecimal h1 = new Hexadecimal(5);
+	Rational r1 = new Rational (5,1);
+	System.out.println(h1.compareTo(r1));
 	
 
     }//end main()

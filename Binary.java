@@ -1,11 +1,11 @@
 /*
 Ruochong Wu
-APCS1 PD10
-HW43 -- This or That
-2015-07-12
+APCS1 Pd10
+HW45 -- Come Together
+2015-12-09
 */
 
-public class Binary {
+public class Binary implements Comparable{
 
     private int _decNum;
     private String _binNum;
@@ -51,6 +51,10 @@ public class Binary {
       =====================================*/
     public String toString() { 
 	return _binNum;
+    }
+
+    public int get_decNum(){
+	return _decNum;
     }
 
 
@@ -153,15 +157,14 @@ public class Binary {
       negative integer if this<input, positive integer otherwise
       =============================================*/
     public int compareTo( Object other ) {
-	int otherVal = binToDec(other.toString());
-	if (this._decNum == otherVal){
-	    return 0;
+	if (other == null){
+	    throw new NullPointerException("The input is null");
 	}
-	else if(this._decNum > otherVal){
-	    return 1;
+	if (other instanceof Comparable){
+	    return this._decNum - ((Comparable)other).get_decNum();
 	}
 	else {
-	    return -1;
+	    throw new ClassCastException("The input is not a comparable");
 	}
     }
 
@@ -173,7 +176,7 @@ public class Binary {
 	System.out.println();
 	System.out.println( "Testing ..." );
 
-	Binary b1 = new Binary(5);
+	/*	Binary b1 = new Binary(5);
 	Binary b2 = new Binary(5);
 	Binary b3 = b1;
 	Binary b4 = new Binary(7);
@@ -205,6 +208,14 @@ public class Binary {
 	System.out.println( binToDec("110"));
 	System.out.println( binToDecR("111"));
 	System.out.println( binToDecR("110"));
+	*/
+
+	Binary b1 = new Binary(5);
+	System.out.println(b1);
+	Rational h1 = new Rational (5,1);
+	System.out.println(h1);
+	System.out.println(b1.compareTo(h1));
+	
     }//end main()
 
 } //end class
